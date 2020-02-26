@@ -4,7 +4,7 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
-  
+
   constructor(props) {
     super(props);
     console.log("[App.js] Constructor");
@@ -17,7 +17,8 @@ class App extends Component {
       { id: '3', name: 'Farhana', age: 20 }
     ],
     otherState: 'Other value',
-    showPersons: false
+    showPersons: false,
+    showCockpit: true
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -75,7 +76,7 @@ class App extends Component {
 
   render() {
 
-    console.log("[App.js] render" );
+    console.log("[App.js] render");
     let persons = null;
 
     if (this.state.showPersons) {
@@ -86,10 +87,13 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-        <Cockpit showPersons={this.state.showPersons}
-        title={this.props.appTitle}
+        <button onClick={() => {
+          this.setState({showCockpit: false});
+        }}>Remove Cockpit</button>
+        {this.state.showCockpit ? <Cockpit showPersons={this.state.showPersons}
+          title={this.props.appTitle}
           persons={this.state.persons}
-          clicked={this.togglePersonsHandler} />
+          clicked={this.togglePersonsHandler} /> : null}
         {persons}
       </div>
 
